@@ -1,16 +1,17 @@
 import streamlit as st
-#from openai import OpenAI
 import openai
+import os
 import base64
 
-#pip install streamlit openai
-#make sure you have python 3.11 or later
-#to run the program: streamlit run .\Physiatrists_saas_v3.py
-#make sure you have stored the file 'logo.png' in the base directory
+# 1. Retrieve your API key from environment variables or Streamlit secrets
+#    (Replace 'openai_api_key' with whatever key name you used in st.secrets)
+api_key = os.getenv("OPENAI_API_KEY") or st.secrets.get("openai_api_key")
 
+if not api_key:
+    st.warning("OpenAI API key not found. Please set it via environment variable or Streamlit secrets.")
+else:
+    openai.api_key = api_key
 
-# -- 1. Provide your API key (NOT RECOMMENDED to do it this way in production!)
-openai.api_key = "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"
 
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
