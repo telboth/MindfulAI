@@ -4,14 +4,14 @@ import os
 import base64
 
 # 1. Retrieve your API key from environment variables or Streamlit secrets
-#    (Replace 'openai_api_key' with whatever key name you used in st.secrets)
-api_key = os.getenv("OPENAI_API_KEY") or st.secrets.get("openai_api_key")
+#api_key = os.getenv("OPENAI_API_KEY") #or 
+api_key = st.secrets.get("OPENAI_API_KEY")
 
 if not api_key:
     st.warning("OpenAI API key not found. Please set it via environment variable or Streamlit secrets.")
 else:
     openai.api_key = api_key
-
+    #st.write("Have the api_key")
 
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
